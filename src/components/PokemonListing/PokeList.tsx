@@ -3,13 +3,12 @@ import { PokemonResult } from '../PokemonTypes/PokemonTypes';
 const SingleList = lazy(() => import('./SinglePokemonList/SingleList'));
 interface MyComponentProps {
   data: PokemonResult[] | null;
-  loading: boolean
 }
-const PokeList: React.FC<MyComponentProps> = ({ data, loading }) => {
+const PokeList: React.FC<MyComponentProps> = ({ data }) => {
   return (
     <>
       {data?.map(data => (
-        <SingleList loading={loading} singleUrl={data.url} />
+        <SingleList singleUrl={data.url} />
       ))}
     </>
   )

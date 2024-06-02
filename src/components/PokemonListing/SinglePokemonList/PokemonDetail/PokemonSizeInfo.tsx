@@ -5,7 +5,6 @@ interface MyComponentProps {
   sizeData: number | undefined
 }
 const PokemonSizeInfo: React.FC<MyComponentProps> = ({ size, sizeData }) => {
-  const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
   return (
     <Box textAlign={'center'}>
       <Text fontSize={14} color={"#fff"} opacity={0.5}>{size}</Text>

@@ -1,21 +1,21 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import './App.css';
 import {
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
   Box,
   Flex,
   Stack,
   Button,
   Container,
+  Input,
+  InputGroup,
+  InputRightElement,
 } from '@chakra-ui/react'
 import axios from 'axios'
 import { PokemonData, PokemonResult, singlePokeData, singlePokemon } from './components/PokemonTypes/PokemonTypes';
 import PokeList from './components/PokemonListing/PokeList';
 import SinglePokemonLoading from './components/PokemonListing/SinglePokemonList/Loader/SinglePokemonLoading';
+import SingleList from './components/PokemonListing/SinglePokemonList/SingleList';
+import { Search2Icon } from '@chakra-ui/icons';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(false)
@@ -23,6 +23,8 @@ function App() {
   const [nextUrl, setNextUrl] = useState<string | null>()
   const [prevUrl, setPrevUrl] = useState<string | null>()
   const [pokeUrls, setPokeUrls] = useState<PokemonResult[] | null>(null);
+  const [query, setQuery] = useState<string>('')
+  const [searchUrl, setSearchUrl] = useState<string>('')
   const fetchData = async () => {
     setLoading(true)
     setPokeUrls(null)
@@ -32,11 +34,12 @@ function App() {
     setPrevUrl(data.previous)
     setLoading(false)
   }
-
   useEffect(() => {
     fetchData();
   }, [url])
-
+  const searchQuery = () => {
+    setSearchUrl(query.toLocaleLowerCase())
+  }
   return (
     <><Box background={'linear-gradient(to top, #2c2b2e, #16141b)'}>
       <Container maxW={{
@@ -46,9 +49,10 @@ function App() {
         lg: '950',
         xl: '1200px',
       }}
+        height={'100%'}
         py={'50px'}
         margin={'0px auto'}>
-        <Stack spacing={4} direction='row' align='center'>
+        <Stack spacing={4} direction='row' align='center' justifyContent={'center'} margin={'0px auto'} maxW={'800px'} flexWrap={"wrap"}>
           <Button colorScheme='teal' size='md' isDisabled={prevUrl ? false : true} onClick={() => setUrl(prevUrl ?? url)}>
             Previous
           </Button>
@@ -56,21 +60,22 @@ function App() {
             Next
           </Button>
         </Stack>
-        <Flex width={'100%'} flexWrap={"wrap"} alignItems={'center'} marginTop={10} justifyContent={'space-between'} rowGap={'20px'}>
-          {loading ? (<>
-            <SinglePokemonLoading />
-            <SinglePokemonLoading />
-            <SinglePokemonLoading />
-            <SinglePokemonLoading />
-            <SinglePokemonLoading />
-            <SinglePokemonLoading />
-            <SinglePokemonLoading />
-            <SinglePokemonLoading />
-            <SinglePokemonLoading />
-            <SinglePokemonLoading />
-          </>
-          )
-            : <PokeList loading={loading} data={pokeUrls} />
+        <Flex width={'100%'} flexWrap={"wrap"} alignItems={'center'} marginTop={10} justifyContent={'center'} gap={'15px'}>
+          {loading ?
+            <>
+              <SinglePokemonLoading />
+              <SinglePokemonLoading />
+              <SinglePokemonLoading />
+              <SinglePokemonLoading />
+              <SinglePokemonLoading />
+              <SinglePokemonLoading />
+              <SinglePokemonLoading />
+              <SinglePokemonLoading />
+              <SinglePokemonLoading />
+              <SinglePokemonLoading />
+            </>
+            :
+            <PokeList data={pokeUrls} />
           }
         </Flex>
       </Container>

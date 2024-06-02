@@ -4,14 +4,14 @@ import React from 'react'
 const SinglePokemonLoading = () => {
   return (
     <Flex border={'2px solid #000'}
-      width={{ base: "340px", sm: "50%", md: "calc(33% - 10px)", lg: "calc(25% - 10px)", xl: "calc(20% - 10px)" }}
+      width={{ base: "250", sm: "calc(50% - 8px)", md: "calc(33% - 10px)", lg: "calc(25% - 10px)", xl: "calc(20% - 12px)" }}
       direction={'column'}
       alignItems={'center'}
       gap={4}
       overflow='hidden'
       padding={'20px'}
       background={'linear-gradient(to bottom, rgb(43, 42, 42), rgb(27, 27, 27))'}
-      boxShadow={'0 3px 10px #ff0000'}
+      boxShadow={'0 3px 10px #A0AEC0'}
       transition={'all 0.2s ease-in-out'}
       borderRadius={10}
     >
