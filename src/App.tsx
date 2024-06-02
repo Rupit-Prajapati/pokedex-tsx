@@ -29,6 +29,7 @@ function App() {
     setLoading(true)
     setPokeUrls(null)
     const { data } = await axios.get<PokemonData>(url)
+    console.log(data)
     setNextUrl(data.next)
     setPokeUrls(data.results)
     setPrevUrl(data.previous)

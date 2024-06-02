@@ -1,29 +1,24 @@
 import {
+  Badge,
   Flex, Text
 } from '@chakra-ui/react';
 import React from 'react';
-import { types } from '../../../PokemonTypes/PokemonTypes';
+import { PokemonType, types } from '../../../PokemonTypes/PokemonTypes';
+import { typeColors } from '../../../PokemonColor/pokemonColor';
 
 interface PokemonTypesDisplayProps {
   types: types[];
 }
 
 const PokemonTypesDisplay: React.FC<PokemonTypesDisplayProps> = ({ types }) => {
-  const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
   return (
-    <><Flex gap={1}>
-      <Text fontSize={14} color="#fff" opacity={0.5}>
-        Type:
-      </Text>
-      <Text as="b" fontSize={14} color="#fff">
-        {types.map((type, index) => (
-          <Text key={index} as="b" fontSize={14} color="#fff">
-            {capitalize(type.type.name)}
-            {index < types.length - 1 ? '/' : ''}
-          </Text>
-        ))}
-      </Text>
+    <><Flex gap={2} flexWrap={'wrap'}>
+      {types.map((type, index) => {
+        return (
+          <Badge key={index} borderRadius={20} padding={"5px 15px"} backgroundColor={typeColors[type.type.name as PokemonType]}>{type.type.name}</Badge>
+        )
+      })}
     </Flex>
     </>
   );

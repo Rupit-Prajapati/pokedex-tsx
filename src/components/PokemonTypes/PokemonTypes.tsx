@@ -14,13 +14,14 @@ export interface singlePokeData {
       }
     }
   }
-  stats: {
-    base_stat: number
-    stat: {
-      name: string
-    }
-  }
+  stats: stat[]
   types: types[]
+}
+export interface stat {
+  base_stat: number
+  stat: {
+    name: string
+  }
 }
 export interface types {
   type: {
