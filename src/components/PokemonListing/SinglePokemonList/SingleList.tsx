@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { PokemonType, singlePokeData } from '../../PokemonTypes/PokemonTypes';
-import { Box, Button, Flex, Image, Slider, SliderFilledTrack, SliderThumb, SliderTrack, Text, useDisclosure } from '@chakra-ui/react'
+import { Box, Button, Flex, Image, Text, useDisclosure } from '@chakra-ui/react'
 import { PokemonImage, PokemonSizeInfo, PokemonTypesDisplay } from './PokemonDetail'
 import { PokemonCard } from '../../StyledComponents/PokemonCard';
 import PokemonStat from './PokemonDetail/PokemonStat';
