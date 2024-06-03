@@ -27,7 +27,6 @@ const SingleList: React.FC<MyComponentsProps> = ({ singleUrl }) => {
       const { data } = await axios.get<singlePokeData>(singleUrl)
       setSingleData(data);
       setColor(typeColors[data.types[0].type.name as PokemonType])
-      console.log(data)
     } catch (err) {
       setError('Pokemon not found. Please check the name and try again.');
       setSingleData(null);
