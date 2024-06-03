@@ -76,6 +76,9 @@ const SingleList: React.FC<MyComponentsProps> = ({ singleUrl }) => {
                   src={singleData?.sprites.other.dream_world.front_default} alt={singleData?.name}
                 />
                 <PokemonTypesDisplay types={singleData?.types || []} />
+                <Text fontWeight={600} fontSize={18} color={color as PokemonType}>
+                  {capitalize(singleData?.name)}
+                </Text>
               </Flex>
               <Flex direction={'column'} gap={4} width={{ base: '100%', md: '300px' }}>
                 <PokemonStat stats={singleData?.stats} />

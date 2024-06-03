@@ -8,7 +8,7 @@ const PokemonSizeInfo: React.FC<MyComponentProps> = ({ size, sizeData }) => {
   return (
     <Box textAlign={'center'}>
       <Text fontSize={14} opacity={0.5}>{size}</Text>
-      <Text as='b' fontSize={14} >{sizeData as number / 10}{size === 'Wight' ? "kg" : 'ft'}</Text>
+      <Text as='b' fontSize={14} >{sizeData as number / 10}{size === 'Weight' ? "kg" : 'ft'}</Text>
     </Box>)
 }
 
