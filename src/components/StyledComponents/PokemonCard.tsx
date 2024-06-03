@@ -14,10 +14,11 @@ export const PokemonCard = styled(Flex)`
     width: calc(25% - 10px);
   }
   @media (min-width: 80em) {
-    width: calc(25% - 12px);
+    width: calc(20% - 12px);
   }
   flex-direction: column;
   align-items: center;
+  color:#fff;
   gap: 16px;
   overflow: hidden;
   padding: 20px;

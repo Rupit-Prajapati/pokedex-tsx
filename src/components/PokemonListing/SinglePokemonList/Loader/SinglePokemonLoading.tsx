@@ -4,7 +4,7 @@ import React from 'react'
 const SinglePokemonLoading = () => {
   return (
     <Flex border={'2px solid #000'}
-      width={{ base: "300px", sm: "calc(50% - 8px)", md: "calc(33% - 10px)", lg: "calc(25% - 10px)", xl: "calc(25% - 12px)" }}
+      width={{ base: "300px", sm: "calc(50% - 8px)", md: "calc(33% - 10px)", lg: "calc(25% - 10px)", xl: "calc(20% - 12px)" }}
       direction={'column'}
       alignItems={'center'}
       gap={4}
@@ -49,9 +49,7 @@ const SinglePokemonLoading = () => {
             Type:
           </Text>
           <Text as="b" fontSize={14} color="#fff">
-            Type:<Text as="b" fontSize={14} color="#fff">
-              Water/Fire
-            </Text>
+            Water/Fire
           </Text>
         </Flex>
       </Skeleton>

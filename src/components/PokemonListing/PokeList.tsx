@@ -8,7 +8,7 @@ const PokeList: React.FC<MyComponentProps> = ({ data }) => {
   return (
     <>
       {data?.map(data => (
-        <SingleList singleUrl={data.url} />
+        <SingleList key={data.name} singleUrl={data.url} />
       ))}
     </>
   )
