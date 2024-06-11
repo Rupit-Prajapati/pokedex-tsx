@@ -19,7 +19,7 @@ export const PokemonCard = styled(Flex)`
   flex-direction: column;
   align-items: center;
   color:#fff;
-  gap: 16px;
+  gap: 12px;
   overflow: hidden;
   padding: 20px;
   background: linear-gradient(to bottom, rgb(43, 42, 42), rgb(27, 27, 27));

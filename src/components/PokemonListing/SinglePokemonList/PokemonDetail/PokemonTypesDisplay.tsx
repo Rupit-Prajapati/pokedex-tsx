@@ -13,7 +13,7 @@ interface PokemonTypesDisplayProps {
 const PokemonTypesDisplay: React.FC<PokemonTypesDisplayProps> = ({ types }) => {
 
   return (
-    <><Flex gap={2} flexWrap={'wrap'}>
+    <><Flex gap={2} flexWrap={'wrap'} height={7}>
       {types.map((type, index) => {
         return (
           <Badge key={index} borderRadius={20} padding={"5px 15px"} backgroundColor={typeColors[type.type.name as PokemonType]}>{type.type.name}</Badge>

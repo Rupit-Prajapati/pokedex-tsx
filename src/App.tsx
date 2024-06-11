@@ -23,8 +23,7 @@ function App() {
   const [nextUrl, setNextUrl] = useState<string | null>()
   const [prevUrl, setPrevUrl] = useState<string | null>()
   const [pokeUrls, setPokeUrls] = useState<PokemonResult[] | null>(null);
-  const [query, setQuery] = useState<string>('')
-  const [searchUrl, setSearchUrl] = useState<string>('')
+
   const fetchData = async () => {
     setLoading(true)
     setPokeUrls(null)
@@ -37,11 +36,9 @@ function App() {
   useEffect(() => {
     fetchData();
   }, [url])
-  const searchQuery = () => {
-    setSearchUrl(query.toLocaleLowerCase())
-  }
+
   return (
-    <><Box background={'linear-gradient(to top, #2c2b2e, #16141b)'}>
+    <>
       <Container maxW={{
         base: '100%',
         sm: '450px',
@@ -68,19 +65,12 @@ function App() {
               <SinglePokemonLoading />
               <SinglePokemonLoading />
               <SinglePokemonLoading />
-              <SinglePokemonLoading />
-              <SinglePokemonLoading />
-              <SinglePokemonLoading />
-              <SinglePokemonLoading />
-              <SinglePokemonLoading />
             </>
             :
             <PokeList data={pokeUrls} />
           }
         </Flex>
       </Container>
-    </Box></>
-  );
+    </>)
 }
-
 export default App;

@@ -72,6 +72,7 @@ const SingleList: React.FC<MyComponentsProps> = ({ singleUrl }) => {
                 <PokemonSizeInfo size={"Height"} sizeData={singleData?.height} />
               </Flex>
               <PokemonTypesDisplay types={singleData?.types || []} />
+              <Button colorScheme='teal' size='md' mt={2} height={'auto'} borderRadius={5} padding={"5px 15px"} onClick={onOpen}>View Stats</Button>
               <PokemonModal isOpen={isOpen} onClose={onClose} >
                 <Flex gap={5} flexWrap={'wrap'} justifyContent={'center'}>
                   <Flex direction={'column'} gap={2} height={{ base: "250px", sm: '300px' }} width={{ base: '250px', md: '300px' }} background={'linear-gradient(to bottom,rgba(214, 214, 214, 0.3),rgba(77, 77, 77, 0.1))'} boxShadow={'0 0 10px 10px rgba(202, 201, 201, 0.05)'} borderRadius={'50%'} justifyContent={'center'} alignItems={'center'}>
