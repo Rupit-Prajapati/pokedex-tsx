@@ -7,12 +7,13 @@ import { PokemonCard } from '../../StyledComponents/PokemonCard';
 import PokemonStat from './PokemonDetail/PokemonStat';
 import { typeColors } from '../../PokemonColor/pokemonColor';
 import PokemonModal from './PokemonDetail/PokemonPopup/PokemonModal';
+import SinglePokemonLoading from './Loader/SinglePokemonLoading';
 
 interface MyComponentsProps {
   singleUrl: string
 }
 const SingleList: React.FC<MyComponentsProps> = ({ singleUrl }) => {
-
+  const [loading, setLoading] = useState<boolean>(false);
   const [singleData, setSingleData] = useState<singlePokeData | null>(null)
   const [color, setColor] = useState<string | null>(null)
   const [error, setError] = useState('')
@@ -24,13 +25,16 @@ const SingleList: React.FC<MyComponentsProps> = ({ singleUrl }) => {
 
   const fetchSingleData = async () => {
     try {
+      setLoading(true)
       const { data } = await axios.get<singlePokeData>(singleUrl)
       setSingleData(data);
       setColor(typeColors[data.types[0].type.name as PokemonType])
+      setLoading(false)
     } catch (err) {
       setError('Pokemon not found. Please check the name and try again.');
       setSingleData(null);
       setColor(null);
+      setLoading(false)
     }
   }
 
@@ -43,49 +47,52 @@ const SingleList: React.FC<MyComponentsProps> = ({ singleUrl }) => {
 
   return (
     <>
-      {error ? (
-        <Flex justifyContent="center" alignItems="center" marginTop={10}>
-          <Text fontSize={16} color="#ff0000">
-            {error}
-          </Text>
-        </Flex>
-      ) : (
-        <PokemonCard onClick={onOpen} color={color as PokemonType}>
-          <PokemonImage src={singleData?.sprites.other.dream_world.front_default} name={singleData?.name} />
-          <Flex gap={2}>
-            <Text fontSize={16} opacity={0.5}>
-              Name:
-            </Text>
-            <Text as='b' fontSize={16} color={"#fff"}>
-              {capitalize(singleData?.name)}
+      {error
+        ? (
+          <Flex justifyContent="center" alignItems="center" marginTop={10}>
+            <Text fontSize={16} color="#ff0000">
+              {error}
             </Text>
           </Flex>
-          <Flex gap={8}>
-            <PokemonSizeInfo size={"Weight"} sizeData={singleData?.weight} />
-            <PokemonSizeInfo size={"Height"} sizeData={singleData?.height} />
-          </Flex>
-          <PokemonTypesDisplay types={singleData?.types || []} />
-          <PokemonModal isOpen={isOpen} onClose={onClose} >
-            <Flex gap={5} flexWrap={'wrap'} justifyContent={'center'}>
-              <Flex direction={'column'} gap={2} height={{ base: "250px", sm: '300px' }} width={{ base: '250px', md: '300px' }} background={'linear-gradient(to bottom,rgba(214, 214, 214, 0.3),rgba(77, 77, 77, 0.1))'} boxShadow={'0 0 10px 10px rgba(202, 201, 201, 0.05)'} borderRadius={'50%'} justifyContent={'center'} alignItems={'center'}>
-                < Image
-                  maxW={{ base: "180px", sm: '280px' }}
-                  height={{ base: "180px", sm: '280px' }}
-                  objectFit='contain'
-                  src={singleData?.sprites.other.dream_world.front_default} alt={singleData?.name}
-                />
-                <PokemonTypesDisplay types={singleData?.types || []} />
-                <Text fontWeight={600} fontSize={18} color={color as PokemonType}>
+        ) : loading
+          ? <SinglePokemonLoading />
+          : (
+            <PokemonCard onClick={onOpen} color={color as PokemonType}>
+              <PokemonImage src={singleData?.sprites.other.dream_world.front_default} name={singleData?.name} />
+              <Flex gap={2}>
+                <Text fontSize={16} opacity={0.5}>
+                  Name:
+                </Text>
+                <Text as='b' fontSize={16} color={"#fff"}>
                   {capitalize(singleData?.name)}
                 </Text>
               </Flex>
-              <Flex direction={'column'} gap={4} width={{ base: '100%', md: '300px' }}>
-                <PokemonStat stats={singleData?.stats} />
+              <Flex gap={8}>
+                <PokemonSizeInfo size={"Weight"} sizeData={singleData?.weight} />
+                <PokemonSizeInfo size={"Height"} sizeData={singleData?.height} />
               </Flex>
-            </Flex>
-          </PokemonModal>
-        </PokemonCard>
-      )}
+              <PokemonTypesDisplay types={singleData?.types || []} />
+              <PokemonModal isOpen={isOpen} onClose={onClose} >
+                <Flex gap={5} flexWrap={'wrap'} justifyContent={'center'}>
+                  <Flex direction={'column'} gap={2} height={{ base: "250px", sm: '300px' }} width={{ base: '250px', md: '300px' }} background={'linear-gradient(to bottom,rgba(214, 214, 214, 0.3),rgba(77, 77, 77, 0.1))'} boxShadow={'0 0 10px 10px rgba(202, 201, 201, 0.05)'} borderRadius={'50%'} justifyContent={'center'} alignItems={'center'}>
+                    < Image
+                      maxW={{ base: "180px", sm: '280px' }}
+                      height={{ base: "180px", sm: '280px' }}
+                      objectFit='contain'
+                      src={singleData?.sprites.other.dream_world.front_default} alt={singleData?.name}
+                    />
+                    <PokemonTypesDisplay types={singleData?.types || []} />
+                    <Text fontWeight={600} fontSize={18} color={color as PokemonType}>
+                      {capitalize(singleData?.name)}
+                    </Text>
+                  </Flex>
+                  <Flex direction={'column'} gap={4} width={{ base: '100%', md: '300px' }}>
+                    <PokemonStat stats={singleData?.stats} />
+                  </Flex>
+                </Flex>
+              </PokemonModal>
+            </PokemonCard>
+          )}
     </>)
 }
 
