@@ -49,8 +49,8 @@ const SingleList: React.FC<MyComponentsProps> = ({ singleUrl }) => {
     <>
       {error
         ? (
-          <Flex justifyContent="center" alignItems="center" marginTop={10}>
-            <Text fontSize={16} color="#ff0000">
+          <Flex justifyContent="center" alignItems="center">
+            <Text fontSize={25} color={'red.600'}>
               {error}
             </Text>
           </Flex>
